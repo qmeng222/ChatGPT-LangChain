@@ -7,6 +7,7 @@
 - Tech stack: ChatGPT, LangChain, Python
 - Overview:
   - Programming workflow: ![What's going on inside my code?](images/programming-workflow.png)
+  - Connecting chains (the output from Chain A serves as the input for Chain B): ![Connecting chains](/images/connecting-chains.png)
 
 ## Setup:
 
