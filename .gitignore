@@ -1,0 +1,17 @@
+# touch .gitignore
+# files with a dot (.) preceding their name are hidden by default
+# hidden files are not visible when using the `ls` command alone
+# to reveal these concealed files, use `ls -a` instead
+
+# ------ FILES ------
+# *.md # ignore all markdown files that end with a .md file extension
+.env
+# does not ignore the README.md file:
+!README.md
+
+# ------ FOLDERS ------
+# to ignore all files and directories that have a name starting with img:
+# img*
+
+# to ignore an entire directory with all its contents, include the name of the directory with the slash at the end:
+env/
