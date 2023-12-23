@@ -4,13 +4,24 @@
 # to reveal these concealed files, use `ls -a` instead
 
 # ------ FILES ------
-# *.md # ignore all markdown files that end with a .md file extension
-.env
+# # ignore all markdown files that end with a .md file extension in the current directory where the .gitignore file is located (it doesn't automatically extend to files in subdirectories):
+# *.md
+
+# # ignore the top-level .env files but not the .env files in subdirectories:
+# .env
+
+# ignore all .env files in any directory, including the root and subdirectories:
+**/.env
+# a single asterisk (*) which matches only one directory level
+# two asterisks (**) can match zero or more directories deep within the repository structure
+
+# Git does not follow symbolic links when accessing a .gitignore file
+
 # does not ignore the README.md file:
 !README.md
 
 # ------ FOLDERS ------
-# to ignore all files and directories that have a name starting with img:
+# # ignore all files and directories that have a name starting with img:
 # img*
 
 # to ignore an entire directory with all its contents, include the name of the directory with the slash at the end:
