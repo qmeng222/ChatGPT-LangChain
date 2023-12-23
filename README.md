@@ -5,9 +5,11 @@
 - Description: Production-ready apps focused on real-world AI integration.
 - Highlights:
 - Tech stack: ChatGPT, LangChain, Python
-- Overview:
-  - Programming workflow: ![What's going on inside my code?](images/programming-workflow.png)
-  - Connecting chains (the output from Chain A serves as the input for Chain B): ![Connecting chains](/images/connecting-chains.png)
+- Overviews:
+  - Integration:
+    ![programming workflow](images/programming-workflow.png)
+    ![Connecting chains (the output from Chain A serves as the input for Chain B)](/images/connecting-chains.png)
+  - Terminal chat (tchat):
 
 ## Setup:
 
@@ -24,12 +26,12 @@
      pip show openai langchain # display info about the installed packages
      ```
    - Install the python-dotenv library: `pip install python-dotenv`
-4. Create a symbolic link in the current working directory from the .env file under the root directory (now each project depends on the central .env file under root):
-   - `ln -s ../.env .env` (using a relative path to create a symbolic link)
+4. Create a symbolic link in each project directory from the .env file under the root directory:
+   - `ln -s ../.env .env` (using a relative path to create a symbolic link; it's common practice to give a symlink the same name as its target for convenience, but we don't have to)
    - or `ln -s /.env .env` (using the absolute path)
    - or more generally `ln -s </target-directory/target-file> </symlink-directory/example-symlink>` (The </symlink-directory/> is optional. If not specified, the symlink is created in the current working directory.)
 5. Generate a snapshot of the installed packages and their versions to the requirements.txt file (or overwrite the txt file): `pip freeze > requirements.txt`, so others can install all the packages and their respective versions specified in the requirements.txt file with `pip install -r requirements.txt`
-6. Run the code: `python main.py`
+6. Run the code in each project directory: `python main.py`
 
 ## Resources:
 
