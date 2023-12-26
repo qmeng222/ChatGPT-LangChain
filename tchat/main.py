@@ -1,16 +1,22 @@
-from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate # prompt
+from langchain.memory import ConversationBufferMemory
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder, HumanMessagePromptTemplate # prompt
 from langchain.chat_models import ChatOpenAI # model
 from langchain.chains import LLMChain # chain
 from dotenv import load_dotenv # load variables from .env
 
 
+# ------ CONVERSATION BUFFER MEMORY ------
+memory = ConversationBufferMemory(memory_key="messages", return_messages=True)
+
+
 # ------ PROMPT ------
 # prompt instance (a ChatPromptTemplate object):
 prompt = ChatPromptTemplate(
-  input_variables=["content"], # only 1 input var
+  input_variables=["content", "messages"], # only 1 input var
   messages=[
-      HumanMessagePromptTemplate.from_template("{content}")
-      # {content} is a placeholder that will be filled with the value of the "content" input variable
+    MessagesPlaceholder(variable_name="messages"),
+    HumanMessagePromptTemplate.from_template("{content}")
+    # {content} is a placeholder that will be filled with the value of the "content" input variable
   ]
 )
 
@@ -28,8 +34,9 @@ chat = ChatOpenAI()
 # ------ CHAIN ------
 # chain instance:
 chain = LLMChain(
-    prompt=prompt, # prompt
-    llm=chat # model
+  memory=memory,
+  prompt=prompt, # prompt
+  llm=chat # model
 )
 
 
