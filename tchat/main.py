@@ -1,13 +1,26 @@
-from langchain.memory import ConversationBufferMemory, FileChatMessageHistory
+from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory, FileChatMessageHistory
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder, HumanMessagePromptTemplate # prompt
 from langchain.chat_models import ChatOpenAI # model
 from langchain.chains import LLMChain # chain
 from dotenv import load_dotenv # load variables from .env
 
 
+# ------ MODEL ------
+# load variables from a file named .env:
+load_dotenv()
+# load_dotenv(dotenv_path=".env2") # load variables from a file named .env2
+# the .env file typically contains key-value pairs in the form of "environment variable" assignments
+
+# model instance:
+chat = ChatOpenAI(verbose=True)
+
+
 # ------ MEMORY ------
-memory = ConversationBufferMemory(
-  chat_memory=FileChatMessageHistory("history.json"), # store chat history in `history.json` file
+# ref: https://python.langchain.com/docs/modules/memory/types/summary
+# memory = ConversationBufferMemory(
+memory = ConversationSummaryMemory(
+  # chat_memory=FileChatMessageHistory("history.json"), # store chat history in `history.json` file
+  llm=chat,
   memory_key="messages",
   return_messages=True
 )
@@ -25,22 +38,13 @@ prompt = ChatPromptTemplate(
 )
 
 
-# ------ MODEL ------
-# load variables from a file named .env:
-load_dotenv()
-# load_dotenv(dotenv_path=".env2") # load variables from a file named .env2
-# the .env file typically contains key-value pairs in the form of "environment variable" assignments
-
-# model instance:
-chat = ChatOpenAI()
-
-
 # ------ CHAIN ------
 # chain instance:
 chain = LLMChain(
   memory=memory,
   prompt=prompt, # prompt
-  llm=chat # model
+  llm=chat, # model
+  verbose=True
 )
 
 

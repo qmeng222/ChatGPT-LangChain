@@ -9,7 +9,8 @@
   - Integration:
     ![programming workflow](images/programming-workflow.png)
     ![Connecting chains (the output from Chain A serves as the input for Chain B)](/images/connecting-chains.png)
-  - Terminal chat (tchat):
+  - Memory type: conversation summary
+    ![conversation summary memory with verbose=True](images/conversation-summary.png)
 
 ## Setup:
 
