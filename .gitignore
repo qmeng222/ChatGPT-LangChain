@@ -26,4 +26,3 @@
 
 # to ignore an entire directory with all its contents (with the slash at the end):
 env/
-images/
