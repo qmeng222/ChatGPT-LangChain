@@ -24,5 +24,6 @@
 # # ignore all files and directories that have a name starting with img:
 # img*
 
-# to ignore an entire directory with all its contents, include the name of the directory with the slash at the end:
+# to ignore an entire directory with all its contents (with the slash at the end):
 env/
+images/

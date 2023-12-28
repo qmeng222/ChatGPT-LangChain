@@ -8,9 +8,12 @@
 - Overviews:
   - Integration:
     ![programming workflow](images/programming-workflow.png)
-    ![Connecting chains (the output from Chain A serves as the input for Chain B)](/images/connecting-chains.png)
+    ![connecting chains (the output from Chain A serves as the input for Chain B)](/images/connecting-chains.png)
   - Memory type: conversation summary
     ![conversation summary memory with verbose=True](images/conversation-summary.png)
+  - FactQA:
+    ![factQA](images/fact-QA.png)
+    ![loading files with document loaders](images/document-loaders.png)
 
 ## Setup:
 
@@ -33,6 +36,12 @@
    - or more generally `ln -s </target-directory/target-file> </symlink-directory/example-symlink>` (The </symlink-directory/> is optional. If not specified, the symlink is created in the current working directory.)
 5. Generate a snapshot of the installed packages and their versions to the requirements.txt file (or overwrite the txt file): `pip freeze > requirements.txt`, so others can install all the packages and their respective versions specified in the requirements.txt file with `pip install -r requirements.txt`
 6. Run the code in each project directory: `python main.py`
+
+## Study notes:
+
+1. Embeddings: ![embeddings](images/embeddings.png)
+2. Semantic search: understanding the search context
+   ![semantic search](images/semantic-search.png)
 
 ## Resources:
 
