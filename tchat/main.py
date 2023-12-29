@@ -18,7 +18,7 @@ chat = ChatOpenAI(verbose=True)
 # ------ MEMORY ------
 # ref: https://python.langchain.com/docs/modules/memory/types/summary
 # memory = ConversationBufferMemory(
-memory = ConversationSummaryMemory( # generate summary
+memory = ConversationSummaryMemory(
   # chat_memory=FileChatMessageHistory("history.json"), # store chat history in `history.json` file
   llm=chat,
   memory_key="messages",

@@ -13,7 +13,7 @@
     ![conversation summary memory with verbose=True](images/conversation-summary.png)
   - FactQA:
     ![factQA](images/fact-QA.png)
-    ![loading files with document loaders](images/document-loaders.png)
+    ![embedding flow](images/embedding-flow.png)
 
 ## Setup:
 
@@ -30,6 +30,7 @@
      pip show openai langchain # display info about the installed packages
      ```
    - Install the python-dotenv library: `pip install python-dotenv`
+   - Install the tiktoken package (It's developed by OpenAI to count the number of tokens in a given text. Tokens are chunks of text that can be as short as one character or as long as one word, depending on the language and the specific text): `pip install tiktoken`
 4. Create a symbolic link in each project directory from the .env file under the root directory:
    - `ln -s ../.env .env` (using a relative path to create a symbolic link; it's common practice to give a symlink the same name as its target for convenience, but we don't have to)
    - or `ln -s /.env .env` (using the absolute path)
@@ -39,8 +40,9 @@
 
 ## Study notes:
 
-1. Embeddings: ![embeddings](images/embeddings.png)
-2. Semantic search: understanding the search context
+1. Document loaders: ![loading files with document loaders](images/document-loaders.png)
+2. Embeddings: ![embeddings](images/embeddings.png)
+3. Semantic search: understanding the search context
    ![semantic search](images/semantic-search.png)
 
 ## Resources:

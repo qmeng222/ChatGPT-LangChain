@@ -1,5 +1,6 @@
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
+from langchain.embeddings import OpenAIEmbeddings
 from dotenv import load_dotenv # load variables from .env
 
 
@@ -17,6 +18,13 @@ text_splitter = CharacterTextSplitter(
 )
 
 
+# --- EMBEDDINGS (for each chunk) ---
+embeddings = OpenAIEmbeddings()
+
+# # run a quick test:
+# emb = embeddings.embed_query("I like cooking.")
+# print(emb) # a list of numbers
+
 # ------ DOCUMENT LOADERS ------
 # load text data from the specified file path:
 loader = TextLoader("facts.txt")
@@ -26,12 +34,12 @@ docs = loader.load_and_split(
     text_splitter=text_splitter
 )
 
-print(docs)
+# print(docs)
 # # list of sub documents:
 # [ Document(page_content="1. ...\n2. ...\n3. ...", metadata={'source': 'facts.txt'}),
 #   Document(page_content="4. ...\n5. ...",         metadata={'source': 'facts.txt'}),
 #   ... ]
 
-print("---------")
-for doc in docs:
-  print(doc.page_content, "\n")
+# print("---------")
+# for doc in docs:
+#   print(doc.page_content, "\n")
