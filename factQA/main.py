@@ -1,8 +1,8 @@
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
-# langchain library > vectorstores package > chroma module > import the class:
 from langchain.vectorstores.chroma import Chroma # for storing embeddings
+# 👆langchain library > vectorstores package > chroma module > import the class
 from dotenv import load_dotenv # load variables from .env
 
 
@@ -20,7 +20,7 @@ text_splitter = CharacterTextSplitter(
 )
 
 
-# --- EMBEDDINGS (for each chunk) ---
+# ------ EMBEDDINGS ------
 embeddings = OpenAIEmbeddings()
 
 # # run a quick test:
@@ -47,7 +47,8 @@ docs = loader.load_and_split(
 #   print(doc.page_content, "\n")
 
 
-# --- STORE EMBEDDINGS ---
+# ------ STORE EMBEDDINGS (for chunks) ------
+# (database creation) create a Chroma database instance directly from a collection of documents:
 db = Chroma.from_documents(
     docs,
     embedding=embeddings,
@@ -56,6 +57,7 @@ db = Chroma.from_documents(
 
 
 # --- SIMILARITY SEARCH (in the vector store) ---
+# # 1. similarity_search_with_score：
 # results = db.similarity_search_with_score(
 #   "What is an interesting fact about the English language?"
 # )
@@ -64,11 +66,13 @@ db = Chroma.from_documents(
 #   print(result[1]) # similarity score
 #   print(result[0].page_content)
 
+# 2. similarity_search ONLY：
 results = db.similarity_search(
   "What is an interesting fact about the English language?",
   # k=1 # give me the most relevant (one single chunk)
 )
 # print(results)
+
 # # list of sub documents:
 # # [ Document(page_content="1. ...\n2. ...\n3. ...", metadata={'source': 'facts.txt'}),
 # #   Document(page_content="86. ...\n87. ...",       metadata={'source': 'facts.txt'}),
