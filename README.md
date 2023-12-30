@@ -12,8 +12,8 @@
   - Memory type: conversation summary
     ![conversation summary memory with verbose=True](images/conversation-summary.png)
   - FactQA:
-    ![factQA](images/fact-QA.png)
     ![embedding flow](images/embedding-flow.png)
+    ![factQA](images/fact-QA.png)
 
 ## Setup:
 
@@ -31,11 +31,12 @@
      ```
    - Install the python-dotenv library: `pip install python-dotenv`
    - Install the tiktoken package (It's developed by OpenAI to count the number of tokens in a given text. Tokens are chunks of text that can be as short as one character or as long as one word, depending on the language and the specific text): `pip install tiktoken`
-4. Create a symbolic link in each project directory from the .env file under the root directory:
+   - Installs the Chroma database (an open-source vector database designed specifically for working with embeddings): `pip install chromadb`
+4. Generate a snapshot of the installed packages and their versions to the requirements.txt file (or overwrite the txt file): `pip freeze > requirements.txt`, so others can install all the packages and their respective versions specified in the requirements.txt file with `pip install -r requirements.txt`
+5. Create a symbolic link in each project directory from the .env file under the root directory:
    - `ln -s ../.env .env` (using a relative path to create a symbolic link; it's common practice to give a symlink the same name as its target for convenience, but we don't have to)
    - or `ln -s /.env .env` (using the absolute path)
    - or more generally `ln -s </target-directory/target-file> </symlink-directory/example-symlink>` (The </symlink-directory/> is optional. If not specified, the symlink is created in the current working directory.)
-5. Generate a snapshot of the installed packages and their versions to the requirements.txt file (or overwrite the txt file): `pip freeze > requirements.txt`, so others can install all the packages and their respective versions specified in the requirements.txt file with `pip install -r requirements.txt`
 6. Run the code in each project directory: `python main.py`
 
 ## Study notes:
