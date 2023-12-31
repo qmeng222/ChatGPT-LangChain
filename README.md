@@ -45,6 +45,15 @@
 2. Embeddings: ![embeddings](images/embeddings.png)
 3. Semantic search: understanding the search context
    ![semantic search](images/semantic-search.png)
+4. Chain types:
+   - stuff:
+     ![stuff](images/chain-type-stuff.png)
+   - refine: LLM updates its response with further context (run in series)
+     ![refine](images/chain-type-refine.png)
+   - map_reduce: build a summary of each document, then feed all summaries into the user's question
+     ![map_reduce](images/chain-type-map_reduce.png)
+   - map_rerank: find relevant info within each document, then return the one with the highest relevance score
+     ![map_rerank](images/chain-type-map_rerank.png)
 
 ## Resources:
 

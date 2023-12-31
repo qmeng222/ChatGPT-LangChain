@@ -5,6 +5,9 @@ from langchain.vectorstores.chroma import Chroma # for storing embeddings
 from dotenv import load_dotenv # for loading variables from .env
 from langchain.chat_models import ChatOpenAI # model
 from langchain.chains import RetrievalQA # chain
+# import langchain
+
+# langchain.debug = True # for printing all intermediate outputs and inputs on the chain
 
 
 # ------ MODEL ------
@@ -32,9 +35,10 @@ retriever = db.as_retriever()
 
 # create a retrieval-based question-answering chain:
 chain = RetrievalQA.from_chain_type(
-    chain_type="stuff", # specify the type of chain to create
+    chain_type="stuff", # specify the type of chain to create (take some context from the vector store and "stuff" it into the prompt)
     retriever=retriever, # the retriever object for retrieving info from db
-    llm=chat # model used to generate answers
+    llm=chat, # model used to generate answers
+    # verbose=True
 )
 
 
