@@ -5,9 +5,10 @@ from langchain.vectorstores.chroma import Chroma # for storing embeddings
 from dotenv import load_dotenv # for loading variables from .env
 from langchain.chat_models import ChatOpenAI # model
 from langchain.chains import RetrievalQA # chain
-# import langchain
+from redundant_filter_retriever import RedundantFilterRetriever # custom retriever to find relevant docs & remove any duplicate automatically
+import langchain
 
-# langchain.debug = True # for printing all intermediate outputs and inputs on the chain
+langchain.debug = True # for printing all intermediate outputs and inputs on the chain
 
 
 # ------ MODEL ------
@@ -30,8 +31,15 @@ db = Chroma(
 
 
 # ------ RETRIEVAL CHAIN ------
-# (from the db instance) create a retriever object to retrieve info from the db:
-retriever = db.as_retriever()
+# # (from the db instance) create a retriever object to retrieve info from the db:
+# retriever = db.as_retriever()
+
+# or use custom retriever instead:
+retriever = RedundantFilterRetriever(
+    # provide the 2 customization attributes:
+    embeddings=embeddings,
+    chroma=db
+)
 
 # create a retrieval-based question-answering chain:
 chain = RetrievalQA.from_chain_type(

@@ -25,7 +25,7 @@ class RedundantFilterRetriever(BaseRetriever):
         # to find similarities to an embedding we have already calculated (`emb`) & remove duplicates automatically:
         return self.chroma.max_marginal_relevance_search_by_vector(
             embedding=emb, # emb is an embedding or vector representation being used in the search
-            lambda_mult=0.8 # lambda multiplier ranging from 0 to 1
+            lambda_mult=0.8 # lambda multiplier ranging from 0 to 1 (higher value allows for similar docs)
         )
 
     async def aget_relevant_documents(self):
