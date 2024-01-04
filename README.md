@@ -7,13 +7,13 @@
 - Tech stack: ChatGPT, LangChain, Python
 - Overviews:
   - Integration:
-    ![programming workflow](images/programming-workflow.png)
-    ![connecting chains (the output from Chain A serves as the input for Chain B)](/images/connecting-chains.png)
+    ![programming workflow](images/programming_workflow.png)
+    ![connecting chains (the output from Chain A serves as the input for Chain B)](/images/connecting_chains.png)
   - Memory type: conversation summary
-    ![conversation summary memory with verbose=True](images/conversation-summary.png)
+    ![conversation summary memory with verbose=True](images/conversation_summary.png)
   - FactQA:
-    ![embedding flow](images/embedding-flow.png)
-    ![factQA](images/fact-QA.png)
+    ![embedding flow](images/embedding_flow.png)
+    ![factQA](images/fact_QA.png)
 
 ## Setup:
 
@@ -41,19 +41,19 @@
 
 ## Study notes:
 
-1. Document loaders: ![loading files with document loaders](images/document-loaders.png)
+1. Document loaders: ![loading files with document loaders](images/document_loaders.png)
 2. Embeddings: ![embeddings](images/embeddings.png)
 3. Semantic search: understanding the search context
-   ![semantic search](images/semantic-search.png)
+   ![semantic search](images/semantic_search.png)
 4. Chain types:
    - stuff:
-     ![stuff](images/chain-type-stuff.png)
+     ![stuff](images/chain_type_stuff.png)
    - refine: LLM updates its response with further context (run in series)
-     ![refine](images/chain-type-refine.png)
+     ![refine](images/chain_type_refine.png)
    - map_reduce: build a summary of each document, then feed all summaries into the user's question
-     ![map_reduce](images/chain-type-map_reduce.png)
+     ![map_reduce](images/chain_type_map_reduce.png)
    - map_rerank: find relevant info within each document, then return the one with the highest relevance score
-     ![map_rerank](images/chain-type-map_rerank.png)
+     ![map_rerank](images/chain_type_map_rerank.png)
 
 ## Resources:
 
