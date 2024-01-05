@@ -14,6 +14,8 @@
   - FactQA:
     ![embedding flow](images/embedding_flow.png)
     ![factQA](images/fact_QA.png)
+  - Agents:
+    ![app overview](images/agents_app_overview.png)
 
 ## Setup:
 
