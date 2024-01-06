@@ -34,7 +34,12 @@ tables = list_tables()
 # create an instance of the ChatPromptTemplate class (chat-based prompts/series of messages exchanged between user and system):
 prompt = ChatPromptTemplate(
     messages=[
-      SystemMessage(content=f"You are an AI that has access to a SQLite database.\n{tables}"), # system message about tables in the database
+      SystemMessage(content=(
+            "You are an AI that has access to a SQLite database.\n"
+            f"The database has tables of: {tables}\n"
+            "Do not make any assumptions about what tables exist or what columns exist."
+            "Instead, use the 'describe_tables' function."
+        )), # system message about tables in the database
       HumanMessagePromptTemplate.from_template("{input}"), # human message template with a placeholder
       MessagesPlaceholder(variable_name="agent_scratchpad") # dynamically insert or replace values during the prompt generation process & think of that agent_scratchpad as being like a form of memory (for tracking human msgs, assistant msgs, and function msgs) inside our app
     ]
