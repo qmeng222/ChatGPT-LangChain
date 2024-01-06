@@ -9,10 +9,24 @@ from langchain.tools import Tool
 conn = sqlite3.connect("db.sqlite")
 
 
+# list out all tables in the database:
+def list_tables():
+    c = conn.cursor()
+    c.execute("SELECT name FROM sqlite_master WHERE type='table';") # query execution
+    rows = c.fetchall() # fetch results as a list
+    # print("👀", rows) # list of tuples
+    # # [('users',), ('addresses',), ('products',), ('carts',), ('orders',), ('order_products',)]
+    # return rows
+    return "\n".join(row[0] for row in rows if row[0] is not None) # a lengthy string formatted for vertical display
+
+
 def run_sqlite_query(query):
     c = conn.cursor() # cursor creation
-    c.execute(query) # query execution
-    return c.fetchall() # return the fetched results as a list
+    try:
+        c.execute(query) # query execution
+        return c.fetchall() # return fetched results as a list
+    except sqlite3.OperationalError as err:
+        return f"The following error occured: {str(err)}"
 
 
 # create an instance of the Tool class based on the provided function:
