@@ -12,7 +12,8 @@ from langchain.agents import OpenAIFunctionsAgent, AgentExecutor # an agent (pre
 
 from dotenv import load_dotenv # load variables from .env
 
-from tools.sql import run_query_tool, list_tables # import funcs from tools/sql.py
+# import funcs from tools/sql.py:
+from tools.sql import run_query_tool, list_tables, describe_tables_tool
 
 
 # ------ MODEL ------
@@ -39,7 +40,8 @@ prompt = ChatPromptTemplate(
     ]
 )
 
-tools = [run_query_tool] # a list of tools for future reference and utilization
+# a list of tools for future reference and utilization:
+tools = [run_query_tool, describe_tables_tool]
 
 # an agent takes a list of tools & convert them into JSON function descriptions:
 agent = OpenAIFunctionsAgent(
