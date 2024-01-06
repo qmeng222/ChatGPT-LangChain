@@ -10,10 +10,10 @@ from langchain.schema import SystemMessage
 
 from langchain.agents import OpenAIFunctionsAgent, AgentExecutor # an agent (pretty much a chain) is a module that acts on behalf of a user or system to interact with OpenAI services
 
-from dotenv import load_dotenv # load variables from .env
-
 # import funcs from tools/sql.py:
 from tools.sql import run_query_tool, list_tables, describe_tables_tool
+
+from dotenv import load_dotenv # load variables from .env
 
 
 # ------ MODEL ------

@@ -4,6 +4,11 @@ import sqlite3
 # from the langchain package > tools module, import the Tool class:
 from langchain.tools import Tool
 
+# import the BaseModel class from the Pydantic library:
+from pydantic.v1 import BaseModel
+
+from typing import List
+
 
 # connect to a SQLite database (creates a new one if it doesn't exist):
 conn = sqlite3.connect("db.sqlite")
@@ -42,17 +47,26 @@ def run_sqlite_query(query):
 
 # ------------ tools ------------
 
+# define a new class which inherits from BaseModel:
+class DescribeTablesArgsSchema(BaseModel):
+    table_names: List[str] # enforce the table_names be present and be a list of string(s)
+
 # create an instance of the Tool class based on the provided function:
 describe_tables_tool = Tool.from_function(
     name="describe_tables", # name the tool
     description="Given a list of table names, returns the schema of those tables", # describe the tool
-    func=describe_tables # specify a function to execute
+    func=describe_tables, # specify a function to execute
+    args_schema=DescribeTablesArgsSchema
 )
 
+# define a new class which inherits from BaseModel:
+class RunQueryArgsSchema(BaseModel):
+    query: str # an instance of RunQueryArgsSchema is expected to have a query attribute of type str (enforce the query attribute be present and be a string)
 
 # create an instance of the Tool class based on the provided function:
 run_query_tool = Tool.from_function(
     name="run_sqlite_query", # name the tool
     description="Run a sqlite query.", # describe the tool
-    func=run_sqlite_query # specify a function to execute
+    func=run_sqlite_query, # specify a function to execute
+    args_schema=RunQueryArgsSchema # if you want to use this function, you must provide an argument called query, and it's supposed to be a string
 )
