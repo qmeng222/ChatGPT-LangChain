@@ -66,7 +66,7 @@ tools = [
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
 
-# ------ CHAIN ------
+# ------ AGENT EXECUTOR (chain) ------
 # an agent takes a list of tools & convert them into JSON function descriptions:
 agent = OpenAIFunctionsAgent(
     llm=chat,
