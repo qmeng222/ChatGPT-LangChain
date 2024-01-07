@@ -18,7 +18,14 @@ from tools.sql import run_query_tool, list_tables, describe_tables_tool
 # import funcs from tools/report.py:
 from tools.report import write_report_tool
 
+# import funcs from handler/chat_model_start_handler.py:
+from handlers.chat_model_start_handler import ChatModelStartHandler
+
 from dotenv import load_dotenv # load variables from .env
+
+
+# ------ CALLBACK HANDLERS ------
+handler = ChatModelStartHandler()
 
 
 # ------ MODEL ------
@@ -27,7 +34,9 @@ load_dotenv()
 # load_dotenv(dotenv_path=".env2") # load variables from a file named .env2
 
 # model instance:
-chat = ChatOpenAI()
+chat = ChatOpenAI(
+    callbacks=[handler]
+)
 
 
 # ------ PROMPT ------
@@ -66,7 +75,7 @@ tools = [
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
 
-# ------ AGENT EXECUTOR (chain) ------
+# ------ CHAINS ------
 # an agent takes a list of tools & convert them into JSON function descriptions:
 agent = OpenAIFunctionsAgent(
     llm=chat,
@@ -77,7 +86,7 @@ agent = OpenAIFunctionsAgent(
 # an agent executor takes an agent (pretty much a chain) & runs that chain over and over again until the response we get back from ChatGPT is not a function call (essentially a fancy while loop):
 agent_executor = AgentExecutor(
     agent=agent,
-    verbose=True, # produce additional output or logging information during its execution
+    # verbose=True, # produce additional output or logging information during its execution
     tools=tools, # specify a list of tools that the AgentExecutor can use in its execution
     memory=memory # store the final responses
 )
