@@ -10,6 +10,8 @@ from langchain.schema import SystemMessage
 
 from langchain.agents import OpenAIFunctionsAgent, AgentExecutor # an agent (pretty much a chain) is a module that acts on behalf of a user or system to interact with OpenAI services
 
+from langchain.memory import ConversationBufferMemory # for providing conversational memory
+
 # import funcs from tools/sql.py:
 from tools.sql import run_query_tool, list_tables, describe_tables_tool
 
@@ -29,7 +31,6 @@ chat = ChatOpenAI()
 
 
 # ------ PROMPT ------
-
 # (sys msg) list out all tables in the db:
 tables = list_tables()
 # print(tables) # [('users',), ('addresses',), ('products',), ('carts',), ('orders',), ('order_products',)] -> 'users\naddresses\n...'
@@ -43,11 +44,14 @@ prompt = ChatPromptTemplate(
             "Do not make any assumptions about what tables exist or what columns exist."
             "Instead, use the 'describe_tables' function."
         )), # system message about tables in the database
+      MessagesPlaceholder(variable_name="chat_history"), # put before any brand new human message (query) that comes in
       HumanMessagePromptTemplate.from_template("{input}"), # human message template with a placeholder
-      MessagesPlaceholder(variable_name="agent_scratchpad") # dynamically insert or replace values during the prompt generation process & think of that agent_scratchpad as being like a form of memory (for tracking human msgs, assistant msgs, and function msgs) inside our app
+      MessagesPlaceholder(variable_name="agent_scratchpad") # dynamically insert or replace values during the prompt generation process & think of that agent_scratchpad as being like a form of memory (for tracking intermediate steps like human msgs, assistant msgs, and function msgs) inside our app
     ]
 )
 
+
+# ------ TOOLS ------
 # a list of tools for future reference and utilization:
 tools = [
   run_query_tool,
@@ -55,6 +59,14 @@ tools = [
   write_report_tool
 ]
 
+
+# ------ MEMORY (store final results)------
+# the key is a way to distinguish different types of memories or data stored in the memory
+# return the stored messages when queried or interacted with
+memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+
+
+# ------ CHAIN ------
 # an agent takes a list of tools & convert them into JSON function descriptions:
 agent = OpenAIFunctionsAgent(
     llm=chat,
@@ -66,10 +78,16 @@ agent = OpenAIFunctionsAgent(
 agent_executor = AgentExecutor(
     agent=agent,
     verbose=True, # produce additional output or logging information during its execution
-    tools=tools # specify a list of tools that the AgentExecutor can use in its execution
+    tools=tools, # specify a list of tools that the AgentExecutor can use in its execution
+    memory=memory # store the final responses
 )
 
 # use the agent_executor object to process the given natural language query:
 # agent_executor("How many users are in the database?")
 # agent_executor("How many users have provided a shipping address?")
-agent_executor("Summarize the top 5 most popular products. Write the results to a report file.")
+agent_executor(
+    "How many orders are there? Write the result to an html report."
+)
+agent_executor(
+    "Repeat the exact same process for users."
+)

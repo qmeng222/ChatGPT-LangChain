@@ -17,5 +17,5 @@ write_report_tool = StructuredTool.from_function(
     name="write_report", # name the tool
     description="Write an HTML file to disk. Use this tool whenever someone asks for a report.", # describe the tool
     func=write_report, # specify a function to execute
-    args_schema=WriteReportArgsSchema # specify the argument schema (which outlines the expected structure of the arguments)
+    args_schema=WriteReportArgsSchema # specify the argument schema (the expected structures and types of inputs for a function)
 )
