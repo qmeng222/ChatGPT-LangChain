@@ -13,6 +13,9 @@ from langchain.agents import OpenAIFunctionsAgent, AgentExecutor # an agent (pre
 # import funcs from tools/sql.py:
 from tools.sql import run_query_tool, list_tables, describe_tables_tool
 
+# import funcs from tools/report.py:
+from tools.report import write_report_tool
+
 from dotenv import load_dotenv # load variables from .env
 
 
@@ -46,7 +49,11 @@ prompt = ChatPromptTemplate(
 )
 
 # a list of tools for future reference and utilization:
-tools = [run_query_tool, describe_tables_tool]
+tools = [
+  run_query_tool,
+  describe_tables_tool,
+  write_report_tool
+]
 
 # an agent takes a list of tools & convert them into JSON function descriptions:
 agent = OpenAIFunctionsAgent(
@@ -64,5 +71,5 @@ agent_executor = AgentExecutor(
 
 # use the agent_executor object to process the given natural language query:
 # agent_executor("How many users are in the database?")
-agent_executor("How many users have provided a shipping address?")
-
+# agent_executor("How many users have provided a shipping address?")
+agent_executor("Summarize the top 5 most popular products. Write the results to a report file.")
