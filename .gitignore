@@ -26,5 +26,6 @@
 
 # to ignore an entire directory with all its contents (with the slash at the end):
 env/
+
 # # ignore any directory named `__pycache__` at any level:
 # __pycache__/

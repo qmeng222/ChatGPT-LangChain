@@ -16,6 +16,8 @@
     ![factQA](images/fact_QA.png)
   - Agents:
     ![app overview](images/agents_app_overview.png)
+  - PDFAnswerBot:
+    ![wrokflow](images/PDFAnswerBot_workflow.png)
 
 ## Setup:
 
@@ -25,7 +27,7 @@
    source env/bin/activate
    ```
 2. Upgrade the pip package manager to the latest version within the current Python environment: `python -m pip install --upgrade pip`
-3. Install libraries/packages:
+3. Install libraries/packages/dependencies:
    - Install the **_openai_** package with a version that is strictly before 1.0.0 (ensuring compatibility with versions before the major release) and the latest version of the **_langchain_** package:
      ```
      pip install "openai<1.0.0" langchain
