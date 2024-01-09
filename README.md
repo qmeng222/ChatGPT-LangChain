@@ -33,7 +33,8 @@
      ```
    - Install the python-dotenv library: `pip install python-dotenv`
    - Install the tiktoken package (It's developed by OpenAI to count the number of tokens in a given text. Tokens are chunks of text that can be as short as one character or as long as one word, depending on the language and the specific text): `pip install tiktoken`
-   - Installs the Chroma database (a vector database optimized for storing and querying embeddings): `pip install chromadb`
+   - Install the Chroma database (a vector database optimized for storing and querying embeddings): `pip install chromadb`
+   - Install the pyboxen library to create visually appealing and customizable boxes and borders in the terminal: `pip install pyboxen`
 4. Generate a snapshot of the installed packages and their versions to the requirements.txt file (or overwrite the txt file): `pip freeze > requirements.txt`, so others can install all the packages and their respective versions specified in the requirements.txt file with `pip install -r requirements.txt`
 5. Create a symbolic link in each project directory from the .env file under the root directory:
    - `ln -s ../.env .env` (using a relative path to create a symbolic link; it's common practice to give a symlink the same name as its target for convenience, but we don't have to)
@@ -61,3 +62,4 @@
 
 1. [.gitignore File – How to Ignore Files and Folders in Git](https://www.freecodecamp.org/news/gitignore-file-how-to-ignore-files-and-folders-in-git/)
 2. [Create a symbolic link in Unix](https://kb.iu.edu/d/abbe)
+3. [Keyword Argument & Positional Argument in Python](https://www.geeksforgeeks.org/keyword-and-positional-argument-in-python/)
